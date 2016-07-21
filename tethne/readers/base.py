@@ -163,8 +163,8 @@ class IterParser(BaseParser):
         if hasattr(self.data[-1], tag):
             value = getattr(self.data[-1], tag)
             if tag in self.concat_fields:
-                if type(data) is str:
-                    data = data.decode(self.encoding)
+                #if type(data) is str:
+                #    data = data.decode(self.encoding)
                 value = ' '.join([value, unicode(data)])
             elif type(value) is list:
                 value.append(data)
@@ -288,8 +288,8 @@ class XMLParser(IterParser):
         if data:
             data = data.strip()
 
-        if type(data) is str:
-            data = data.decode(self.encoding)
+        #if type(data) is str:
+        #    data = data.decode(self.encoding)
 
         self.handle(tag, data)
         self.last_tag = tag
