@@ -9,7 +9,6 @@ PYTHON_3 = sys.version_info[0] == 3
 if PYTHON_3:
     unicode = str
 
-
 def _fast_iter(context, func, tag):
     for event, elem in context:
         func(elem)
@@ -48,7 +47,7 @@ class BaseParser(object):
 
         self.encoding = 'utf-8'
 
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
         self.open()
@@ -102,7 +101,7 @@ class IterParser(BaseParser):
         """
         # The user should be able to limit parsing to specific fields.
         if parse_only:
-            tag_lookup = {v: k for k, v in self.tags.iteritems()}
+            tag_lookup = {v: k for k, v in self.tags.items()}
             self.parse_only = set([tag_lookup.get(field)
                                    for field in parse_only
                                    if field in tag_lookup])
@@ -301,7 +300,7 @@ class XMLParser(IterParser):
         """
         # The user should be able to limit parsing to specific fields.
         if parse_only:
-            tag_lookup = {v: k for k, v in self.tags.iteritems()}
+            tag_lookup = {v: k for k, v in self.tags.items()}
             self.parse_only = set([tag_lookup.get(field)
                                    for field in parse_only
                                    if field in tag_lookup]) | set(parse_only)

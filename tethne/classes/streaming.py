@@ -1,7 +1,12 @@
 from tethne.classes.corpus import Corpus
 
-import cPickle as pickle
 import os
+import sys
+PYTHON_3 = sys.version_info[0] == 3
+if PYTHON_3:
+    import pickle
+else:
+    import cPickle as pickle
 
 
 # TODO: persist the index and data.
@@ -64,7 +69,7 @@ class StreamingIndex(object):
         raise NotImplementedError('values() is not available in StreamingIndex')
 
     def update(self, data):
-        for key, paper in data.iteritems():
+        for key, paper in data.items():
             self.__setitem__(key, paper)
 
     def __getitem__(self, key):

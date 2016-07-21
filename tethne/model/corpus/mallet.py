@@ -249,7 +249,7 @@ class LDAModel(Model, LDAMixin):
             try:
                 this_iter = float(prog.match(l).groups()[0])
                 progress = int(100. * this_iter/self.max_iter)
-                print 'Modeling progress: {0}%.\r'.format(progress),
+                print('Modeling progress: {0}%.\r'.format(progress), end=' ')
             except AttributeError:  # Not every line will match.
                 pass
 

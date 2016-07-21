@@ -19,7 +19,7 @@ logger = logging.getLogger('feature')
 logger.setLevel('WARNING')
 
 
-from itertools import chain, izip
+from itertools import chain
 from collections import Counter, defaultdict
 
 import sys
@@ -27,7 +27,10 @@ PYTHON_3 = sys.version_info[0] == 3
 if PYTHON_3:
     xrange = range
     unicode = str
+    izip = zip
 
+else:
+    from itertools import izip
 
 class StructuredFeature(list):
     """
@@ -331,7 +334,7 @@ class BaseFeatureSet(object):
     def __init__(self, features={}):
         self._setUp()
 
-        for paper, feature in features.iteritems():
+        for paper, feature in features.items():
             self.add(paper, feature)
 
     def _setUp(self):
@@ -357,7 +360,7 @@ class BaseFeatureSet(object):
         return self.features.items()
 
     def iteritems(self):
-        return self.features.iteritems()
+        return self.features.items()
 
     @property
     def unique(self):
@@ -452,7 +455,7 @@ class StructuredFeatureSet(BaseFeatureSet):
 
     def transform(self, func):
         features = {}
-        for i, feature in self.features.iteritems():
+        for i, feature in self.features.items():
             feature_ = []
             for f in feature:
                 t = self.lookup[f]
@@ -485,7 +488,7 @@ class StructuredFeatureSet(BaseFeatureSet):
 
         chunks = []
         papers = []
-        for paper, feature in self.features.iteritems():
+        for paper, feature in self.features.items():
             if context in feature.contexts:
                 new_chunks = feature.context_chunks(context)
             else:
@@ -573,7 +576,7 @@ class FeatureSet(BaseFeatureSet):
                                            in allfeatures_keys])
 
             self.with_feature = defaultdict(list)
-            for paper_id, counts in features.iteritems():
+            for paper_id, counts in features.items():
                 try:
                     for elem in zip(*counts)[0]:
                         i = self.lookup[elem]
@@ -615,7 +618,7 @@ class FeatureSet(BaseFeatureSet):
 
         """
         features = {}
-        for i, feature in self.features.iteritems():
+        for i, feature in self.features.items():
             feature_ = []
             for f, v in feature:
                 t = self.lookup[f]
@@ -628,7 +631,7 @@ class FeatureSet(BaseFeatureSet):
 
     def translate(self, func):
         features = {}
-        for i, feature in self.features.iteritems():
+        for i, feature in self.features.items():
             features_ = []
             for f, v in feature:
                 t = self.lookup[f]

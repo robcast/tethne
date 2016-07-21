@@ -144,6 +144,33 @@ def attachment_probability(G, raw=False):
     """
 
     probs = {}
+<<<<<<< Upstream, based on origin/develop
+=======
+    G_ = None
+    k_ = None
+    for k,g in G.graphs.items():
+        new_edges = {}
+        if G_ is not None: 
+            for n in g.nodes():
+                try:
+                    old_neighbors = set(G_[n].keys())
+                    if len(old_neighbors) > 0:
+                        new_neighbors = set(g[n].keys()) - old_neighbors
+                        new_edges[n] = float(len(new_neighbors))
+                    else:
+                        new_edges[n] = 0.
+                except KeyError:
+                    pass
+    
+            N = sum( new_edges.values() )
+            probs[k_] = { n:0. for n in G_.nodes() }
+            if N > 0.:
+                for n in G.nodes():
+                    try:
+                        probs[k_][n] = new_edges[n]/N
+                    except KeyError:
+                        pass
+>>>>>>> 44439c5 begin of quick-and-dirty python3 port.
 
     keys = sorted(G.keys())
     attach = defaultdict(Counter)

@@ -434,7 +434,7 @@ def read(path, corpus=True, index_by='uri', follow_links=False, **kwargs):
         if c.duplicate_papers:
             warnings.warn("Duplicate papers detected. Use the 'duplicate_papers' attribute of the corpus to get the list", UserWarning)
 
-        for fset_name, fset_values in parser.full_text.iteritems():
+        for fset_name, fset_values in parser.full_text.items():
             c.features[fset_name] = StructuredFeatureSet(fset_values)
         return c
     return papers

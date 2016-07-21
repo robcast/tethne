@@ -54,7 +54,7 @@ def plot_burstness(corpus, B, **kwargs):
 
     f = 1
     axes = {}
-    for key, value in B.iteritems():
+    for key, value in B.items():
         x,y = value
         ax = fig.add_subplot(len(B),1,f)
         f+=1
@@ -179,7 +179,7 @@ def plot_sigma(corpus, sigma, nodes=None, **kwargs):
                 norm_by = 0.
 
                 # Organize values in a way that makes selection easier.
-                for node, history in sigma.iteritems():
+                for node, history in sigma.items():
                     years, values = history
                     if max(values) == 0.:
                         continue
@@ -189,7 +189,7 @@ def plot_sigma(corpus, sigma, nodes=None, **kwargs):
                         vals[year][node] = val
 
                 # Get the maximum values for each slice.
-                for year, node_values in vals.iteritems():
+                for year, node_values in vals.items():
                     indices = argsort(node_values.values())[-topn:][::-1]
                     include += [node_values.keys()[i] for i in indices]
                     max_value = max(node_values.values())
@@ -203,7 +203,7 @@ def plot_sigma(corpus, sigma, nodes=None, **kwargs):
                 norm_by = max(maxes)
 
         # Nodes to include.
-        nodes = [node for node, values in sigma.iteritems()
+        nodes = [node for node, values in sigma.items()
                  if max(values[1]) > 0 and node in include]
 
 #     if fig is None: # Create a new Figure instance.
